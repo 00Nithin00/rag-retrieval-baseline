@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta:__legacy__"
+
+[project]
+name = "pksearch"
+version = "0.1.0"
+description = "Reproducible retrieval baseline for RAG systems"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beir",
+    "tqdm",
+    "pydantic",
+    "pyyaml",
+    "typer",
+    "rank-bm25",
+    "numpy",
+    "sentence-transformers",
+    "torch",
+    "hnswlib"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pksearch*"]
