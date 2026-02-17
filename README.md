@@ -92,9 +92,7 @@ All chunk outputs are deterministic.
 
 Reciprocal Rank Fusion (RRF):
 
-\[
-score(d) = \sum \frac{1}{k + rank(d)}
-\]
+score(d) = Σ_i 1 / (k + rank_i(d))
 
 - Retrieve top 50 from BM25
 - Retrieve top 50 from Dense
