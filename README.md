@@ -20,7 +20,7 @@ The primary goal of Week 1 was to:
 
 ## 2. Dataset
 
-We use the **SciFact** dataset from the BEIR benchmark suite.
+I use the **SciFact** dataset from the BEIR benchmark suite.
 
 - Documents: 5,183
 - Queries (test split): 300
@@ -222,4 +222,4 @@ Week 1 establishes the baseline retrieval layer only.
 * Evaluation before optimization
 * Deterministic pipelines
 * Baselines before complexity
-* Measure improvements, do not assume them
+* Measure improvements
