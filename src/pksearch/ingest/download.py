@@ -29,7 +29,6 @@ def main(
 
     download_and_unzip(url, str(settings.raw_dir))
 
-    # BEIR unzips to data/raw/<dataset>
     if not out_dir.exists():
         raise RuntimeError(f"Expected dataset folder not found after download: {out_dir}")
 

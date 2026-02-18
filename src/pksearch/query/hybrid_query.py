@@ -29,12 +29,10 @@ def main(
     bm25 = load_bm25(bm25_path)
     didx = load_dense(dense_path)
 
-    # BM25 retrieve
     t0 = time.time()
     bm25_res = bm25_search(bm25, query=query, top_k=bm25_k)
     bm25_ms = (time.time() - t0) * 1000
 
-    # Dense retrieve
     model = SentenceTransformer(model_name)
     t1 = time.time()
     q = model.encode([query], convert_to_numpy=True, normalize_embeddings=True).astype(np.float32)
@@ -44,7 +42,6 @@ def main(
     dense_res = search_dense(didx, q, top_k=dense_k)
     dense_ms = (time.time() - t2) * 1000
 
-    # Fuse
     t3 = time.time()
     fused = rrf_fuse(bm25_res, dense_res, k=60, top_k=top_k)
     fuse_ms = (time.time() - t3) * 1000

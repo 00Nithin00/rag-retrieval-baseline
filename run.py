@@ -9,10 +9,9 @@ if SRC not in sys.path:
 import runpy
 
 if __name__ == "__main__":
-    # Example: python run.py -m pksearch.eval.run_eval --args...
     if len(sys.argv) >= 3 and sys.argv[1] == "-m":
         mod = sys.argv[2]
-        sys.argv = sys.argv[2:]  # mimic python -m behavior
+        sys.argv = sys.argv[2:] 
         runpy.run_module(mod, run_name="__main__")
     else:
         raise SystemExit("Usage: python run.py -m <module> [args...]")

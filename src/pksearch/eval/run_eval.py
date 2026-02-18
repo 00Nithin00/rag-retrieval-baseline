@@ -38,8 +38,6 @@ def read_qrels_tsv(path: Path, min_rel: int = 1) -> Dict[str, Set[str]]:
     with path.open("r", encoding="utf-8") as f:
         reader = csv.reader(f, delimiter="\t")
         header = next(reader, None)
-        # If header is present, it might be: query-id corpus-id score
-        # We'll detect non-numeric score and treat as header.
         if header:
             def is_int(x: str) -> bool:
                 try:
@@ -47,13 +45,12 @@ def read_qrels_tsv(path: Path, min_rel: int = 1) -> Dict[str, Set[str]]:
                     return True
                 except Exception:
                     return False
-            # If last column isn't int, it's header; else it's a valid row, process it
             if not is_int(header[-1]):
                 pass
             else:
                 row = header
                 rows = [row] + list(reader)
-                reader = rows  # type: ignore
+                reader = rows  
 
         if isinstance(reader, list):
             rows_iter = reader
@@ -166,7 +163,6 @@ def main(
     queries = read_queries(queries_path)
     qrels = read_qrels_tsv(qrels_path, min_rel=1)
 
-    # keep only queries that appear in qrels
     filtered = [(qid, q) for (qid, q) in queries.items() if qid in qrels]
     if max_queries and max_queries > 0:
         filtered = filtered[:max_queries]

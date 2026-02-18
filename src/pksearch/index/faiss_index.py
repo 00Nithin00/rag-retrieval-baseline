@@ -55,7 +55,7 @@ def embed_chunks(
         batch_size=batch_size,
         show_progress_bar=True,
         convert_to_numpy=True,
-        normalize_embeddings=True,  # cosine via dot product
+        normalize_embeddings=True,
     )
     dt = time.time() - t0
     return emb.astype(np.float32), chunk_ids, doc_ids, titles, texts, dt
@@ -116,7 +116,7 @@ def load_dense(path: Path) -> DenseIndex:
 def search_dense(didx: DenseIndex, query_emb: np.ndarray, top_k: int = 10) -> List[Dict[str, Any]]:
     labels, distances = didx.index.knn_query(query_emb, k=top_k)
     labels = labels[0]
-    distances = distances[0]  # cosine distance (lower is better)
+    distances = distances[0]
 
     out = []
     for lbl, dist in zip(labels, distances):
@@ -125,7 +125,7 @@ def search_dense(didx: DenseIndex, query_emb: np.ndarray, top_k: int = 10) -> Li
             {
                 "chunk_id": didx.chunk_ids[i],
                 "doc_id": didx.doc_ids[i],
-                "score": float(1.0 - dist),  # convert to similarity-ish (higher better)
+                "score": float(1.0 - dist),
                 "title": didx.titles[i],
                 "text": didx.texts[i],
             }
