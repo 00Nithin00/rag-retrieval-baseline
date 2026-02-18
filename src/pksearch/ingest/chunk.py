@@ -12,8 +12,8 @@ from pksearch.config import settings
 
 try:
     import regex as re
-except Exception:  # fallback
-    import re  # type: ignore
+except Exception:  
+    import re  
 
 app = typer.Typer(add_completion=False)
 
@@ -90,7 +90,6 @@ def paragraph_chunks(text: str, max_words: int) -> List[str]:
     for p in paras:
         p_words = len(p.split())
         if p_words > max_words * 1.2:
-            # big paragraph: flush buffer, then chunk this paragraph
             flush()
             chunks.extend(fixed_word_chunks(p, chunk_words=max_words, overlap_words=int(max_words * 0.15)))
             continue

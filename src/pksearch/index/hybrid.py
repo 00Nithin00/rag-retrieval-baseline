@@ -21,7 +21,6 @@ def rrf_fuse(
         for rank, r in enumerate(results, start=1):
             cid = r["chunk_id"]
             scores[cid] = scores.get(cid, 0.0) + 1.0 / (k + rank)
-            # keep any payload (title/text) for printing
             if cid not in best_payload:
                 best_payload[cid] = r
 

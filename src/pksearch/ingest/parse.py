@@ -35,7 +35,6 @@ def main(
     n = 0
     with out_path.open("w", encoding="utf-8") as out:
         for rec in tqdm(read_jsonl(corpus_path), desc=f"Parsing {dataset} corpus"):
-            # BEIR corpus schema (typical): {"_id": "...", "title": "...", "text": "..."}
             doc_id = rec.get("_id")
             if doc_id is None:
                 raise ValueError("Corpus record missing _id")

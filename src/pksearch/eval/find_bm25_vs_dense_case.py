@@ -28,7 +28,6 @@ def read_qrels_tsv(path: Path, min_rel: int = 1) -> Dict[str, Set[str]]:
         reader = csv.reader(f, delimiter="\t")
         rows = list(reader)
 
-    # handle optional header
     def is_int(x: str) -> bool:
         try:
             int(x)
@@ -95,7 +94,6 @@ def main(dataset: str = "scifact", split: str = "test", chunker: str = "fixed"):
     didx = load_dense(settings.indexes_dir / dataset / f"dense_{chunker}")
     model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
-    # iterate only qrels-covered queries
     for qid, qtext in queries.items():
         rel = qrels.get(qid)
         if not rel:

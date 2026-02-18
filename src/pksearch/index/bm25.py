@@ -20,8 +20,6 @@ def read_jsonl(path: Path):
 
 
 def simple_tokenize(text: str) -> List[str]:
-    # Deterministic, fast tokenizer (good enough for baseline)
-    # lowercase + split on non-alphanum boundaries
     out = []
     cur = []
     for ch in text.lower():
@@ -42,7 +40,7 @@ class BM25Index:
     chunk_ids: List[str]
     doc_ids: List[str]
     titles: List[str]
-    texts: List[str]  # store text for snippet/debug; small enough on SciFact
+    texts: List[str]
 
 
 def build_bm25_index(chunks_path: Path) -> BM25Index:
